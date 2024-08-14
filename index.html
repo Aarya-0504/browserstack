@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Viewer</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        #log { white-space: pre-wrap; background: #333; color: #fff; padding: 20px; border-radius: 5px; max-height: 400px; overflow-y: scroll; }
+    </style>
+</head>
+<body>
+    <h1>Log Viewer</h1>
+    <div id="log"></div>
+    
+    <script>
+        const logDiv = document.getElementById('log');
+        const ws = new WebSocket(`ws://localhost:3000`);
+
+        ws.onmessage = (event) => {
+            console.log(event.data);
+            logDiv.textContent = event.data;
+            logDiv.scrollTop = logDiv.scrollHeight; // Scroll to the bottom
+        };
+    </script>
+</body>
+</html>
